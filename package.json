@@ -1,0 +1,25 @@
+{
+  "name": "nextjs-serve-external-build",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node next-server -p 80 -nextBuildPath '../some-next-build-application' -NODE_ENV production"
+  },
+  "license": "BSD-3-Clause",
+  "author": "Inspiraller Inspiraller <inspiraller.1@gmail.com> (https://github.com/inspiraller)",
+  "dependencies": {
+    "next": "15.0.2",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028"
+  },
+  "devDependencies": {
+    "express": "^4.21.1"
+  },
+  "main": "next-server.js",
+  "files": [
+    "next-server.js",
+    "package.json",
+    "package-lock.json",
+    "node_modules/"
+  ]
+}
