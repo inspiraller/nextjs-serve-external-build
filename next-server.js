@@ -1,25 +1,28 @@
 const express = require("express");
 const next = require("next");
-const path = require("path");
-const getObjArgs = require("./get-argv");
 
-const objArg = getObjArgs();
-const port = objArg.port || 80;
-const remoteContentPath = objArg.nextBuildPath || "nextBuildPath";
-const NODE_ENV = objArg.NODE_ENV || "development";
-const dev = NODE_ENV !== "production";
+const {
+  NODE_ENV = "development",
+  PORT = 3000,
+  nextBuildPath = "./"
+} = process.env;
 
-const app = next({ dev, dir: remoteContentPath });
+const app = next({
+  dev: NODE_ENV !== "production",
+  dir: nextBuildPath,
+  conf: { distDir: nextBuildPath },
+});
+
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
-  server.use("/static", express.static(path.join(remoteContentPath, ".next")));
   server.get("*", (req, res) => {
     return handle(req, res);
   });
-  server.listen(port, (err) => {
+  server.listen(PORT, (err) => {
     if (err) throw err;
-    console.log(`> Ready on http://localhost:${port}`);
+    console.log(`> Ready on http://localhost:${PORT}`);
+    console.log('serving content from', nextBuildPath);
   });
 });
