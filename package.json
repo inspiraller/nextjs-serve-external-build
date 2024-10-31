@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node next-server -p 80 -nextBuildPath '../some-next-build-application' -NODE_ENV production"
+    "start": "cross-env PORT=3001 NODE_ENV='production' nextBuildPath='../tmdb-24' node next-server ",
+    "pm2-start": "cross-env nextBuildPath='../tmdb-24' node node_modules/pm2/lib/binaries/CLI.js start ecosystem.config.js"
   },
   "license": "BSD-3-Clause",
   "author": "Inspiraller Inspiraller <inspiraller.1@gmail.com> (https://github.com/inspiraller)",
   "dependencies": {
+    "cross-env": "^7.0.3",
     "next": "15.0.2",
+    "pm2": "^5.4.2",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028"
   },
